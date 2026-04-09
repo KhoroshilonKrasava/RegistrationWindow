@@ -16,25 +16,25 @@
     <Window.Resources>
         <Style x:Key="BaseTextStyle" TargetType="Control">
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="10"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
 
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="200"/>
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="350"/>
         </Style>
 
         <Style x:Key="EnterButton" TargetType="Button">
             <Setter Property="Foreground" Value="Gray"/>
             <Setter Property="FontStyle" Value="Normal"/>
             <Setter Property="FontFamily" Value="Calibri"/>
-            <Setter Property="FontSize" Value="10"/>
             <Setter Property="Content" Value="Login"/>
             <Setter Property="Margin" Value="5"/>
 
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="200"/>
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="350"/>
         </Style>
 
         <Style x:Key="TextBox" TargetType="TextBox" BasedOn="{StaticResource BaseTextStyle}"/>
@@ -60,8 +60,10 @@
 
                 <userControls:PlaceHolderUserControl 
                 Style="{StaticResource TextBox}"
-                Placeholder="Login" 
-               />
+                Placeholder="Login"  
+                    
+                    
+                 />
 
                 <PasswordBox  
                 PasswordChar="*" 

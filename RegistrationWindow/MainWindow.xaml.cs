@@ -14,6 +14,7 @@ namespace RegistrationWindow
         {
             InitializeComponent();
         }
+
       
     }
 }
