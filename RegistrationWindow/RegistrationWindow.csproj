@@ -11,10 +11,27 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.1.94" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.0.7" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0" />
+	  <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="VM\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="View\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>
