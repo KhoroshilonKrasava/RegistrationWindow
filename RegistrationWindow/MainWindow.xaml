@@ -15,7 +15,7 @@
     </Window.Style>
     <Window.Resources>
         <Style x:Key="StackPanel" TargetType="StackPanel">
-            
+
         </Style>
         <Style x:Key="BaseTextStyle" TargetType="Control">
             <Setter Property="Margin" Value="5"/>
@@ -58,23 +58,20 @@
                  Height="200"
                  >
 
-            <StackPanel  VerticalAlignment="Center">
+            <StackPanel Margin="20">
 
+                <!-- Привязываем к свойствам ViewModel -->
+                <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="0,0,0,10"
+                 Height="30"/>
 
-                <userControls:PlaceHolderUserControl 
-                Style="{StaticResource TextBox}"
-                Placeholder="Login" 
-               />
+                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+  Margin="0,0,0,10"
+  Height="30"/>
 
-                <PasswordBox  
-                PasswordChar="*" 
-                Style="{StaticResource PasswordBox}"
-                />
-
-                <Button 
-                
-                Style="{StaticResource EnterButton}"
-                />
+                <Button Content="Войти" 
+                Command="{Binding RegisterCommand}"
+                Height="30"/>
 
             </StackPanel>
 

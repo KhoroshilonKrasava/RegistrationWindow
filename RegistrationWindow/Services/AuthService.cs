@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Navigation;
 
 namespace RegistrationWindow.Services
 {
@@ -9,6 +10,7 @@ namespace RegistrationWindow.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHashService _passwordHashService;
+
 
         public AuthService(IUserRepository userRepository, IPasswordHashService passwordHashService)
         {
@@ -22,7 +24,7 @@ namespace RegistrationWindow.Services
                 var user = await _userRepository.GetByLoginAsync(login);
                 if (user is null)
                 {
-                  
+
                     return new AuthResult
                     {
                         IsSuccess = false,
@@ -59,9 +61,51 @@ namespace RegistrationWindow.Services
 
         }
 
-        public Task<AuthResult> RegisterAsync(string login, string password)
+        public async Task<AuthResult> RegisterAsync(string login, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (await _userRepository.IsLoginExistsAsync(login))
+                {
+                    return new AuthResult
+                    {
+                        IsSuccess = false,
+                        Message = "Login already used",
+
+                    };
+                }
+                if (string.IsNullOrEmpty(password) || password.Length < 6)
+                {
+                    return new AuthResult
+                    {
+                        IsSuccess = false,
+                        Message = "Password is wrong"
+                    };
+                }
+
+                var user = new User
+                {
+                    Login = login,
+                    PasswordHash = _passwordHashService.HashPassword(password),
+                };
+                await _userRepository.AddAsync(user);
+                await _userRepository.SaveChangesAsync();
+                return new AuthResult
+                {
+                    IsSuccess = true,
+                    Message = "Reggistration access",
+                    User = user
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new AuthResult
+                {
+                    IsSuccess = false,
+                    Message = $"Registration is wrong: {ex.Message}"
+                };
+            }
         }
     }
 }
