@@ -12,9 +12,7 @@ using RegistrationWindow.Helpers;
 
 namespace RegistrationWindow
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
+    
     public partial class App : Application
     {
         private ServiceProvider _serviceProvider;
@@ -44,10 +42,15 @@ namespace RegistrationWindow
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<MainWindow>();
 
+
+            services.AddSingleton<IUIService, UIService>();
+            services.AddScoped<IPasswordFieldService, PasswordFieldService>();
+            services.AddSingleton<IMainWindowFactory, MainWindowFactory>();
+
             _serviceProvider = services.BuildServiceProvider();
 
-            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = _serviceProvider.GetRequiredService<MainWindowViewModel>();
+            var factory = _serviceProvider.GetRequiredService<IMainWindowFactory>();
+            var mainWindow = factory.Create();
             mainWindow.Show();
         }
     }

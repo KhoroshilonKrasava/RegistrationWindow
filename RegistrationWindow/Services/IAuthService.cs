@@ -6,6 +6,7 @@ namespace RegistrationWindow.Services
     {
         Task<AuthResult> LoginAsync(string login, string password);
         Task<AuthResult> RegisterAsync(string login, string password);
+        //Task AddConfirmPasswordFild();
     }
 
     public class AuthResult

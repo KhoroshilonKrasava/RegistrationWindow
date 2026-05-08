@@ -1,8 +1,10 @@
-﻿using RegistrationWindow.Data.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
+using RegistrationWindow.Data.Models;
 
 namespace RegistrationWindow.Services
 {
@@ -10,12 +12,16 @@ namespace RegistrationWindow.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHashService _passwordHashService;
+       
+
+
 
 
         public AuthService(IUserRepository userRepository, IPasswordHashService passwordHashService)
         {
             _userRepository = userRepository;
             _passwordHashService = passwordHashService;
+           
         }
         public async Task<AuthResult> LoginAsync(string login, string password)
         {
@@ -65,6 +71,7 @@ namespace RegistrationWindow.Services
         {
             try
             {
+
                 if (await _userRepository.IsLoginExistsAsync(login))
                 {
                     return new AuthResult
@@ -107,5 +114,23 @@ namespace RegistrationWindow.Services
                 };
             }
         }
+        //private int count = 0;
+
+        //private TextBox dynamicTextBox = null;
+        //public async Task AddConfirmPasswordFild()
+        //{
+        //    if (count is not >= 1)
+        //    {
+        //        dynamicTextBox = new TextBox();
+        //        count++;
+        //        dynamicTextBox.Style = (Style)_mainWindow.Resources["TextBox"];
+        //        int index = _mainWindow.MainPanel.Children.IndexOf(_mainWindow.targetElement);
+        //        _mainWindow.MainPanel.Children.Insert(index + 1, dynamicTextBox);
+        //    }
+
+        //}
+
+
     }
+   
 }

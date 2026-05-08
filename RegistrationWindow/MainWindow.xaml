@@ -22,10 +22,11 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value ="0,0,0,10"/>
 
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Height" Value="35"/>
-            <Setter Property="Width" Value="350"/>
+            <Setter Property="Width" Value="450"/>
         </Style>
 
         <Style x:Key="EnterButton" TargetType="Button">
@@ -33,11 +34,11 @@
             <Setter Property="FontStyle" Value="Normal"/>
             <Setter Property="FontFamily" Value="Calibri"/>
             <Setter Property="Content" Value="Login"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
 
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Height" Value="35"/>
-            <Setter Property="Width" Value="350"/>
+            <Setter Property="Width" Value="450"/>
         </Style>
 
         <Style x:Key="TextBox" TargetType="TextBox" BasedOn="{StaticResource BaseTextStyle}"/>
@@ -54,28 +55,37 @@
                  CornerRadius="10"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Center"
-                 Width="400"
-                 Height="200"
+                 Width="500"
+                 Height="300"
                  >
 
-            <StackPanel Margin="20">
+            <StackPanel Margin="20" x:Name="MainPanel">
 
-                <!-- Привязываем к свойствам ViewModel -->
                 <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
                  Margin="0,0,0,10"
-                 Height="30"/>
+                 
+                 Style="{StaticResource TextBox}"/>
 
-                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
-  Margin="0,0,0,10"
-  Height="30"/>
 
-                <Button Content="Войти" 
-                Command="{Binding RegisterCommand}"
-                Height="30"/>
+                <TextBox x:Name="targetElement" 
+                         Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0,0,0,10"
+                         
+                          Style="{StaticResource TextBox}"/>
 
+               
+                <Button Content="Ввод" 
+                        Command="{Binding EnterButton}"
+                        Height="30"
+                        Style="{StaticResource EnterButton}"/>
+
+                <Button Command="{Binding AddConfirmPasswordFild}"
+                        Style="{StaticResource EnterButton}"
+                        >Регистрация</Button>
+                
             </StackPanel>
 
         </Border>
-        <StackPanel x:Name="TestBox" Style="{StaticResource StackPanel}"/>
+        
     </Grid >
 </Window>
