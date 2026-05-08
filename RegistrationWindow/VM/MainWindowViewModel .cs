@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.Input;
 using RegistrationWindow.Commands;
 using RegistrationWindow.Helpers;
 using RegistrationWindow.Services;
+using RegistrationWindow.UserControls;
 
 namespace RegistrationWindow.VM
 {
@@ -17,7 +18,7 @@ namespace RegistrationWindow.VM
         private readonly IAuthService _authService;
         private readonly IPasswordFieldService _passwordField;
 
-        private string _login;
+        private string _login ;
         private string _password;
         private string _confirmPassword;
         private bool _isLoading;
@@ -31,8 +32,8 @@ namespace RegistrationWindow.VM
         public ICommand ClearCommand { get; }
         public ICommand AddConfirmPasswordFild { get; }
 
-
-
+        PlaceHolderUserControl placeHolderUserControl = new PlaceHolderUserControl();
+       
         public MainWindowViewModel(IAuthService authService, IMessageService messageService, IPasswordFieldService passwordField)
         {
             _authService = authService;
@@ -51,8 +52,10 @@ namespace RegistrationWindow.VM
             get => _login;
             set
             {
+                
                 _login = value;
                 OnPropertyChanged();
+                
             }
         }
 
@@ -123,6 +126,7 @@ namespace RegistrationWindow.VM
             }
             catch (Exception ex)
             {
+                
                 StatusMessage = $"Критическая ошибка: {ex.Message}";
                 _messageService.ShowStatusMessage(StatusMessage, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -212,6 +216,7 @@ namespace RegistrationWindow.VM
         {
             Login = string.Empty;
             Password = string.Empty;
+            ConfirmPassword = string.Empty;
             StatusMessage = "Готов к работе";
         }
 

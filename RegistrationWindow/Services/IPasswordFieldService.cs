@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using RegistrationWindow.Helpers;
+using RegistrationWindow.UserControls;
 
 namespace RegistrationWindow.Services
 {
-    public interface IUIService 
-    {
-        Task InvokeOnUIThread(Action action);
-    }
 
-    public class UIService : IUIService
-    {
-        public async Task InvokeOnUIThread(Action action)
-        {
-            await Application.Current.Dispatcher.InvokeAsync(action);
-        }
-    }
     public interface IPasswordFieldService
     {
         Task AddConfirmPasswordField();
@@ -40,15 +32,16 @@ namespace RegistrationWindow.Services
             {
                 if (count is not >= 1)
                 {
-                    var dynamicTextBox = new TextBox();
+                    var dynamicTextBox = new PasswordPlaceHolderControl();
+                    dynamicTextBox.Placeholder = "Confirm Password";
                     count++;
 
                     var mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                     if (mainWindow != null)
                     {
                         dynamicTextBox.Style = (Style)mainWindow.Resources["TextBox"];
-                        dynamicTextBox.SetBinding(TextBox.TextProperty, new Binding("ConfirmPassword") { Mode = BindingMode.TwoWay }); 
-                        int index = mainWindow.MainPanel.Children.IndexOf(mainWindow.targetElement);
+                        dynamicTextBox.SetBinding(TextBox.TextProperty, new Binding("ConfirmPassword") { Mode = BindingMode.TwoWay });
+                        int index = mainWindow.MainPanel.Children.IndexOf(mainWindow.PasswordField);//PasswordField - после него будет добавляться поле подтверждения
                         mainWindow.MainPanel.Children.Insert(index + 1, dynamicTextBox);
                     }
                 }

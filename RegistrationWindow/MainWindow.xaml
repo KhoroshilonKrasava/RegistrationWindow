@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegistrationWindow"
+        xmlns:local1="clr-namespace:RegistrationWindow.UserControls"
         xmlns:userControls="clr-namespace:RegistrationWindow.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -60,20 +61,30 @@
                  >
 
             <StackPanel Margin="20" x:Name="MainPanel">
+                
+                <local1:PlaceHolderUserControl
+                     x:Name="LoginField"
+                     Placeholder="Login"
+                     Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="0,0,0,10" 
+                     Style="{StaticResource TextBox}"/>
 
-                <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
-                 Margin="0,0,0,10"
-                 
-                 Style="{StaticResource TextBox}"/>
+                <local1:PasswordPlaceHolderControl 
+                     x:Name="PasswordField"
+                     Placeholder="Password"
+                     Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="0,0,0,10" 
+                     Style="{StaticResource TextBox}"/>
+               
+               
 
-
-                <TextBox x:Name="targetElement" 
+                <!--<TextBox x:Name="targetElement" 
                          Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                          Margin="0,0,0,10"
                          
-                          Style="{StaticResource TextBox}"/>
+                          Style="{StaticResource TextBox}"/>-->
 
-               
+
                 <Button Content="Ввод" 
                         Command="{Binding EnterButton}"
                         Height="30"
@@ -82,10 +93,10 @@
                 <Button Command="{Binding AddConfirmPasswordFild}"
                         Style="{StaticResource EnterButton}"
                         >Регистрация</Button>
-                
+
             </StackPanel>
 
         </Border>
-        
+
     </Grid >
 </Window>

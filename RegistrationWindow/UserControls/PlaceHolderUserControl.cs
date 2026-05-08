@@ -9,14 +9,36 @@ namespace RegistrationWindow.UserControls
 {
     public class PlaceHolderUserControl : TextBox
     {
-        public string Placeholder { get; set; } = "Login";
+        private string _placeholder = "Login";
+
+        public string Placeholder
+        {
+            get => _placeholder;
+            set
+            {
+                _placeholder = value;
+                if (string.IsNullOrWhiteSpace(Text) || Text == _placeholder)
+                {
+                    Text = _placeholder;
+                }
+            }
+        }
+
         public PlaceHolderUserControl()
         {
+            Loaded += OnLoaded;  // Используем Loaded вместо конструктора
             GotFocus += OnGotFocus;
             LostFocus += OnLostFocus;
-            Text += Placeholder;
-            Foreground = Brushes.Gray;
         }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Text))
+            {
+                SetPlaceholder();
+            }
+        }
+
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
             if (Text == Placeholder)
@@ -30,9 +52,14 @@ namespace RegistrationWindow.UserControls
         {
             if (string.IsNullOrWhiteSpace(Text))
             {
-                Text = Placeholder;
-                Foreground = Brushes.Gray;
+                SetPlaceholder();
             }
+        }
+
+        private void SetPlaceholder()
+        {
+            Text = Placeholder;
+            Foreground = Brushes.Gray;
         }
     }
 }
